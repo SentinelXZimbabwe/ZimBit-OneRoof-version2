@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Content Upload | One Roof CMS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+    --primary: #0a3d62;
+    --accent: #00a8ff;
+    --bg: #f4f6f9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, var(--primary), #1e5f9c);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* MAIN CARD */
+.container {
+    width: 100%;
+    max-width: 650px;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+    overflow: hidden;
+}
+
+/* HEADER BAR */
+.header {
+    background: var(--primary);
+    color: white;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h2 {
+    font-size: 1.2rem;
+}
+
+/* LOGOUT BUTTON */
+.logout {
+    background: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.logout:hover {
+    background: #c0392b;
+}
+
+/* BODY */
+.body {
+    padding: 25px;
+}
+
+/* SWITCH */
+.switch {
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+.switch button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    background: #f1f1f1;
+    font-weight: 600;
+}
+
+.switch button.active {
+    background: var(--primary);
+    color: white;
+}
+
+/* INPUTS */
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* FILE */
+.upload-box {
+    border: 2px dashed #ccc;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+/* BUTTON */
+button.submit {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* HIDDEN */
+.hidden {
+    display: none;
+}
+
+/* FOOTNOTE */
+.note {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER WITH LOGOUT -->
+    <div class="header">
+        <h2>One Roof CMS | Content Upload</h2>
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+
+    <div class="body">
+
+        <!-- SWITCH -->
+        <div class="switch">
+            <button id="newsBtn" class="active" onclick="setMode('news')">News / Circular</button>
+            <button id="adBtn" onclick="setMode('ad')">Sponsored Ad</button>
+        </div>
+
+        <!-- FORM -->
+        <form method="POST" enctype="multipart/form-data">
+
+            <input type="hidden" name="type" id="type" value="news">
+
+            <input type="text" name="title" placeholder="Enter Title" required>
+
+            <textarea name="content" rows="5" placeholder="Enter Content" required></textarea>
+
+            <!-- NEWS CATEGORY -->
+            <div id="newsSection">
+                <select name="category">
+                    <option value="">Select Category</option>
+                    <option value="News">News</option>
+                    <option value="Policy">Policy</option>
+                    <option value="Circulars">Circulars</option>
+                    <option value="Examinations">Examinations</option>
+                </select>
+            </div>
+
+            <!-- AD IMAGE -->
+            <div id="adSection" class="hidden">
+                <div class="upload-box">
+                    <input type="file" name="image">
+                    <p>Upload Sponsored Image</p>
+                </div>
+            </div>
+
+            <button type="submit" class="submit">Publish Content</button>
+
+        </form>
+
+        <div class="note">
+            Authorized Ministry Personnel Only
+        </div>
+
+    </div>
+</div>
+
+<script>
+function setMode(mode) {
+    const type = document.getElementById("type");
+    const newsSection = document.getElementById("newsSection");
+    const adSection = document.getElementById("adSection");
+
+    const newsBtn = document.getElementById("newsBtn");
+    const adBtn = document.getElementById("adBtn");
+
+    if (mode === "news") {
+        type.value = "news";
+        newsSection.classList.remove("hidden");
+        adSection.classList.add("hidden");
+
+        newsBtn.classList.add("active");
+        adBtn.classList.remove("active");
+    } else {
+        type.value = "ad";
+        newsSection.classList.add("hidden");
+        adSection.classList.remove("hidden");
+
+        adBtn.classList.add("active");
+        newsBtn.classList.remove("active");
+    }
+}
+</script>
+
+</body>
+</html>

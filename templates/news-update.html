@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>News & Notices | One Roof</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+    --news: #2ecc71;
+    --policy: #9b59b6;
+    --circulars: #e67e22;
+    --exams: #e74c3c;
+    --primary: #0a3d62;
+    --bg: #f4f6f9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: var(--bg);
+}
+
+/* HEADER */
+.header {
+    background: var(--primary);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* TOP BAR */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-home {
+    padding: 10px 15px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border-top: 5px solid transparent;
+}
+
+/* CATEGORY COLORS */
+.news { border-top-color: var(--news); }
+.policy { border-top-color: var(--policy); }
+.circulars { border-top-color: var(--circulars); }
+.examinations { border-top-color: var(--exams); }
+
+/* BADGE */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.badge.news { background: var(--news); }
+.badge.policy { background: var(--policy); }
+.badge.circulars { background: var(--circulars); }
+.badge.examinations { background: var(--exams); }
+
+h3 {
+    margin-bottom: 8px;
+    color: #222;
+}
+
+p {
+    color: #555;
+}
+
+.empty {
+    text-align: center;
+    color: #777;
+    margin-top: 50px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>News, Circulars & Notices</h2>
+</div>
+
+<div class="container">
+
+    <div class="top-bar">
+        <a href="/" class="btn-home">← Back to Home</a>
+    </div>
+
+    <div class="grid">
+
+        {% for item in news %}
+
+        <!-- item = (title, content, category) -->
+        <div class="card {{ item[2]|lower }}">
+
+            <div class="badge {{ item[2]|lower }}">
+                {{ item[2] }}
+            </div>
+
+            <h3>{{ item[0] }}</h3>
+            <p>{{ item[1] }}</p>
+
+        </div>
+
+        {% else %}
+        <div class="empty">
+            No news available yet.
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

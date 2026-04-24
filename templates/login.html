@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login | One Roof CMS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+    --primary: #0a3d62;
+    --accent: #00a8ff;
+    --bg: #f4f6f9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, var(--primary), #1e5f9c);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* LOGIN CARD */
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    overflow: hidden;
+}
+
+/* HEADER */
+.header {
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 25px 20px;
+}
+
+.header h2 {
+    font-size: 1.3rem;
+}
+
+.header p {
+    font-size: 12px;
+    opacity: 0.85;
+    margin-top: 5px;
+}
+
+/* FORM AREA */
+.form-area {
+    padding: 25px;
+}
+
+/* INPUTS */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(0,168,255,0.2);
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #08304d;
+}
+
+/* FOOTNOTE */
+.note {
+    text-align: center;
+    font-size: 11px;
+    color: #777;
+    margin-top: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="header">
+        <h2>One Roof CMS Access Portal</h2>
+        <p>Ministry of Primary and Secondary Education</p>
+    </div>
+
+    <div class="form-area">
+
+        <form method="POST">
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+
+            <button type="submit">Authenticate</button>
+        </form>
+
+        <div class="note">
+            Secure Government Access System • Authorized Personnel Only
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

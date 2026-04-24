@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>One Roof | Ministry of Primary and Secondary Education</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+    --primary: #0a3d62;
+    --secondary: #1e5f9c;
+    --accent: #00a8ff;
+    --bg: #f5f7fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background: var(--primary);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+header img {
+    height: 55px;
+}
+
+/* ADMIN BLOCK (NEW STRUCTURE) */
+.admin-block {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* BUTTONS */
+.admin-btn {
+    background: var(--accent);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.admin-btn:hover {
+    opacity: 0.85;
+}
+
+/* SUPER USER BUTTON (DISTINCT) */
+.super-btn {
+    background: #e67e22;
+}
+
+/* NAV */
+nav {
+    position: sticky;
+    top: 0;
+    background: white;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* HERO */
+.hero {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: white;
+}
+
+.section {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.section h2 {
+    color: var(--primary);
+    margin-bottom: 25px;
+}
+
+/* CARDS */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* ADS */
+.ad-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    border-top: 4px solid var(--accent);
+}
+
+.ad-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* LEADERSHIP COLORS */
+.leader-minister {
+    border-left: 6px solid #c0392b;
+    background: #fff5f5;
+}
+
+.leader-deputy {
+    border-left: 6px solid #2980b9;
+    background: #f0f8ff;
+}
+
+.leader-perm {
+    border-left: 6px solid #27ae60;
+    background: #f3fff6;
+}
+
+.leader-director {
+    border-left: 6px solid #f39c12;
+    background: #fffaf0;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: var(--primary);
+    color: white;
+    margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+
+    <div class="header-left">
+        <img src="{{ url_for('static', filename='coatofarms.png') }}">
+        <div>
+            <h2>One Roof</h2>
+            <small>Ministry of Primary and Secondary Education</small>
+        </div>
+    </div>
+
+    <!-- ADMIN BLOCK -->
+    <div class="admin-block">
+        <a href="/upload" class="admin-btn">Content Admin</a>
+        <a href="/super-user" class="admin-btn super-btn">Super User</a>
+    </div>
+
+</header>
+
+<!-- NAV -->
+<nav>
+    <a href="#home">Home</a>
+    <a href="#ads">Sponsored</a>
+    <a href="#leadership">Hierarchy</a>
+    <a href="#directorate">Directorates</a>
+    <a href="#provinces">Provinces</a>
+    <a href="/news">News</a>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+    <h1>Unified Education Platform</h1>
+    <p>Connecting Zimbabwe’s education ecosystem under one digital roof</p>
+</section>
+
+<!-- ADS -->
+<section id="ads" class="section">
+    <h2>Sponsored Announcements</h2>
+
+    {% for ad in ads %}
+    <div class="card ad-card">
+
+        {% if ad[2] %}
+        <img src="{{ url_for('static', filename='uploads/' + ad[2]) }}">
+        {% endif %}
+
+        <div>
+            <h3>{{ ad[0] }}</h3>
+            <p>{{ ad[1] }}</p>
+        </div>
+
+    </div>
+    {% else %}
+    <p>No sponsored announcements available.</p>
+    {% endfor %}
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership" class="section">
+    <h2>Ministry Leadership Structure</h2>
+
+    <div class="card leader-minister">
+        <strong>Hon. Torerayi Moyo, MP</strong><br>
+        Minister of Primary and Secondary Education<br><br>
+        <em>"Every Child deserves a quality learning environment..."</em>
+    </div>
+
+    <div class="card leader-deputy">
+        <strong>Hon. Angeline Gata, MP</strong><br>
+        Deputy Minister
+    </div>
+
+    <div class="card leader-perm">
+        <strong>Mr. Moses Mhike</strong><br>
+        Permanent Secretary
+    </div>
+</section>
+
+<!-- DIRECTORATE -->
+<section id="directorate" class="section">
+    <h2>National Directorate</h2>
+
+    <div class="grid">
+        <div class="card leader-director">Dr. C. Asante – Curriculum Development</div>
+        <div class="card leader-director">Mrs. S. Muza – Teacher Education & ZINTEC</div>
+        <div class="card leader-director">Eng. B. Makoni – Infrastructure</div>
+        <div class="card leader-director">Mrs. P. Nhema – Human Resources</div>
+        <div class="card leader-director">Mr. T. Gumbo – Finance & IPSAS</div>
+        <div class="card leader-director">Dr. A. Mushangwe – Inclusive Education</div>
+        <div class="card leader-director">Mr. K. Chigwanda – National Examinations</div>
+        <div class="card leader-director">Mrs. T. Rusike – Quality Assurance</div>
+        <div class="card leader-director">Mr. F. Mutandwa – ICT & Innovation</div>
+    </div>
+</section>
+
+<!-- PROVINCES -->
+<section id="provinces" class="section">
+    <h2>Provincial Structure</h2>
+
+    <div class="card">
+        Zimbabwe operates across <strong>10 provinces</strong>, each led by a Provincial Education Director.
+    </div>
+
+    <div class="card">
+        Supported by District Education Officers and District Inspectors.
+    </div>
+
+    <div class="card">
+        Schools are led by Heads, Deputies, and Teachers.
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    &copy; 2026 One Roof System | Ministry of Primary and Secondary Education
+</footer>
+
+</body>
+</html>
