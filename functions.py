@@ -1,7 +1,13 @@
 import sqlite3
+import os
 
-DB_PATH = "databases/users.db"
-CONTENT_DB = "databases/content.db"
+# Resolve absolute paths so WSGI/PythonAnywhere uses the correct files
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "databases", "users.db")
+CONTENT_DB = os.path.join(BASE_DIR, "databases", "content.db")
+
+# Ensure database directory exists
+os.makedirs(os.path.join(BASE_DIR, "databases"), exist_ok=True)
 
 
 # =========================

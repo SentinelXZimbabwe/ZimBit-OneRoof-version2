@@ -10,10 +10,15 @@ app.secret_key = "supersecretkey"
 # =========================
 # CONFIGURATION
 # =========================
-UPLOAD_FOLDER = "static/uploads"
-CONTENT_DB = "databases/content.db"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Use absolute paths so the app can run correctly under WSGI (e.g. PythonAnywhere)
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
+CONTENT_DB = os.path.join(BASE_DIR, "databases", "content.db")
+
+# Ensure necessary directories exist
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(os.path.dirname(CONTENT_DB), exist_ok=True)
 
 # CMS (Content Admin)
 USERNAME = "12344978"
@@ -248,4 +253,4 @@ def super_logout():
 # RUN APPLICATION
 # =========================
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
